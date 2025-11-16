@@ -1,141 +1,198 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>The Overlake School - Home</title>
+    <title>North American Cup Map (2024–2026)</title>
+
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
     <style>
         body {
+            margin: 0;
             font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background: #ffffff;
         }
-
-        /* HEADER */
-        #header {
-            background: #4b2e83;   /* UW Purple */
-            color: white;
-            padding: 20px;
+        #map {
+            width: 100vw;
+            height: 100vh;
         }
-
-        #header h1 {
-            margin: 0;
-            font-size: 32px;
-        }
-
-        /* NAVIGATION */
-        #nav {
-            background: #feeaa7;  /* UW Gold */
-            padding: 10px;
-        }
-
-        #nav ul {
-            list-style-type: none;
-            margin: 0;
-            padding: 0;
-        }
-
-        #nav ul li {
-            display: inline;
-            margin-right: 20px;
-        }
-
-        #nav ul li a {
-            text-decoration: none;
-            color: #4b2e83;   /* UW Purple */
+        .header {
+            position: absolute;
+            top: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 1000;
+            background: white;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-size: 20px;
             font-weight: bold;
-        }
-
-        #nav ul li a:hover {
-            text-decoration: underline;
-        }
-
-        /* MAIN CONTENT */
-        #main {
-            padding: 20px;
-            background: #ffffff;
-            min-height: 400px;
-        }
-
-        h2 {
-            color: #4b2e83;   /* UW Purple */
-        }
-
-        /* FOOTER */
-        #footer {
-            background: #4b2e83;  /* UW Purple */
-            color: white;
-            padding: 15px;
-            text-align: center;
-            margin-top: 20px;
+            box-shadow: 0 0 8px rgba(0,0,0,0.2);
         }
     </style>
-</head>
 
+    <!-- Leaflet JS -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+</head>
 <body>
 
-    <div id="header">
-        <h1>The Overlake School</h1>
-        <p>Redmond, Washington • Independent • Grades 5–12</p>
-    </div>
+<div class="header">North American Cup Locations (2024–2026 Season)</div>
+<div id="map"></div>
 
-    <div id="nav">
-        <ul>
-            <li><a href="#about">About</a></li>
-            <li><a href="#academics">Academics</a></li>
-            <li><a href="#arts">Arts</a></li>
-            <li><a href="#athletics">Athletics</a></li>
-            <li><a href="#admission">Admissions</a></li>
-            <li><a href="#contact">Contact</a></li>
-        </ul>
-    </div>
+<script>
+    // Initialize map
+    var map = L.map('map').setView([39.5, -98.35], 4); // Center of USA
 
-    <div id="main">
-        <h2 id="about">About Overlake</h2>
-        <p>
-            Founded in 1967, The Overlake School is an independent,
-            nonsectarian, coeducational day school located on a 73-acre campus in Redmond, WA.
-            Overlake’s mission is to champion students and their vast potential through
-            engaging educational experiences in a diverse and inclusive community.
-        </p>
+    // Add tile layer
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 18,
+        attribution: '© OpenStreetMap contributors'
+    }).addTo(map);
 
-        <h2 id="academics">Academics</h2>
-        <p>
-            Overlake offers a rigorous college-preparatory program with small class sizes,
-            AP and honors courses, and a strong emphasis on experiential learning and
-            interdisciplinary study.
-        </p>
+    // Event data (locations + notes)
+    const events = [
+        // 2025–26 SEASON (FUTURE EVENTS)
+        {
+            name: "2025 November NAC",
+            date: "Nov 14–17, 2025",
+            location: "Fort Worth, TX",
+            coords: [32.7555, -97.3308],
+            details: "Division I, Cadet, Y14, Cadet Team"
+        },
+        {
+            name: "2026 Junior Olympics",
+            date: "Jan 9–12, 2026",
+            location: "Kansas City, MO",
+            coords: [39.0997, -94.5786],
+            details: "Junior, Cadet, Junior Team"
+        },
+        {
+            name: "2026 January SJCC",
+            date: "Jan 23–25, 2026",
+            location: "Memphis, TN",
+            coords: [35.1495, -90.0490],
+            details: "Junior & Cadet"
+        },
+        {
+            name: "2026 February NAC",
+            date: "Feb 12–15, 2026",
+            location: "Cincinnati, OH",
+            coords: [39.1031, -84.5120],
+            details: "Division I, Junior, Veteran, Parafencing"
+        },
+        {
+            name: "2026 March NAC",
+            date: "Mar 6–9, 2026",
+            location: "Cleveland, OH",
+            coords: [41.4993, -81.6944],
+            details: "Y14, Y12, Y10, Division II"
+        },
+        {
+            name: "2026 April NAC",
+            date: "Apr 24–27, 2026",
+            location: "Richmond, VA",
+            coords: [37.5407, -77.4360],
+            details: "Division I, Junior, Vet, Parafencing"
+        },
+        {
+            name: "2026 June SJCC",
+            date: "June 5–7, 2026",
+            location: "Las Vegas, NV",
+            coords: [36.1699, -115.1398],
+            details: "Junior & Cadet"
+        },
+        {
+            name: "2026 Summer Nationals",
+            date: "June 27–July 6, 2026",
+            location: "Portland, OR",
+            coords: [45.5051, -122.6750],
+            details: "All weapons, all age categories"
+        },
 
-        <h2 id="arts">Arts at Overlake</h2>
-        <p>
-            Students explore visual arts, music, theater, digital design, and more. The
-            arts program encourages creativity, collaboration, and self-expression.
-        </p>
+        // PAST EVENTS (2024–2025 SEASON)
+        {
+            name: "2025 October NAC",
+            date: "Oct 3–6, 2025",
+            location: "Salt Lake City, UT",
+            coords: [40.7608, -111.8910],
+            details: "Division I, Junior, Cadet, Parafencing"
+        },
+        {
+            name: "2025 Summer Nationals",
+            date: "Jun 28–Jul 7, 2025",
+            location: "Milwaukee, WI",
+            coords: [43.0389, -87.9065],
+            details: "All events"
+        },
+        {
+            name: "May SJCC 2025",
+            date: "May 16–18, 2025",
+            location: "Reno, NV",
+            coords: [39.5296, -119.8138],
+            details: "Junior, Cadet"
+        },
+        {
+            name: "April NAC 2025",
+            date: "Apr 11–14, 2025",
+            location: "Los Angeles, CA",
+            coords: [34.0522, -118.2437],
+            details: "Division I, Junior, Parafencing, Veterans"
+        },
+        {
+            name: "March NAC 2025",
+            date: "Mar 7–10, 2025",
+            location: "Cleveland, OH",
+            coords: [41.4993, -81.6944],
+            details: "Y14, Y12, Y10, Cadet"
+        },
+        {
+            name: "2025 Junior Olympics",
+            date: "Feb 14–17, 2025",
+            location: "Charlotte, NC",
+            coords: [35.2271, -80.8431],
+            details: "Junior, Cadet, Division I"
+        },
+        {
+            name: "2025 January NAC",
+            date: "Jan 3–6, 2025",
+            location: "Kansas City, MO",
+            coords: [39.0997, -94.5786],
+            details: "Division I, Cadet, Veterans, Parafencing"
+        },
+        {
+            name: "Dec SJCC 2024",
+            date: "Dec 6–8, 2024",
+            location: "Atlanta, GA",
+            coords: [33.7490, -84.3880],
+            details: "Junior, Cadet, Parafencing"
+        },
+        {
+            name: "Nov NAC 2024",
+            date: "Nov 8–11, 2024",
+            location: "Louisville, KY",
+            coords: [38.2527, -85.7585],
+            details: "Junior, Cadet, Y14"
+        },
+        {
+            name: "Oct NAC 2024",
+            date: "Oct 4–7, 2024",
+            location: "Atlantic City, NJ",
+            coords: [39.3643, -74.4229],
+            details: "Division I, Division II, Junior"
+        }
+    ];
 
-        <h2 id="athletics">Athletics</h2>
-        <p>
-            Overlake supports a robust athletics program including soccer, basketball,
-            cross-country, tennis, volleyball, track & field, and more—helping students
-            build teamwork, resilience, and school spirit.
-        </p>
-
-        <h2 id="admission">Admissions</h2>
-        <p>
-            Overlake welcomes applications from families seeking a supportive, challenging,
-            and inclusive learning environment. Financial aid and tuition assistance are available.
-        </p>
-
-        <h2 id="contact">Contact</h2>
-        <p>
-            The Overlake School<br>
-            20301 NE 108th Street<br>
-            Redmond, WA 98053<br>
-            Phone: 425-868-1000
-        </p>
-    </div>
-
-    <div id="footer">
-        <p>&copy; 2025 The Overlake School. All Rights Reserved.</p>
-    </div>
+    // Add markers
+    events.forEach(event => {
+        L.marker(event.coords)
+            .addTo(map)
+            .bindPopup(
+                `<b>${event.name}</b><br>
+                 <i>${event.date}</i><br>
+                 ${event.location}<br>
+                 <br><b>Events:</b> ${event.details}`
+            );
+    });
+</script>
 
 </body>
 </html>
